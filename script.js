@@ -1,29 +1,53 @@
-const entries = [];
+let db;
+
+initDB();
+
+async function initDB() {
+    const sqlPromise = await initSqlJs({
+        locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/${file}`
+    });
+
+    db = new sqlPromise.Database();
+
+    // Table create
+    db.run(`
+        CREATE TABLE IF NOT EXISTS entries (
+            stock TEXT,
+            buy REAL,
+            sell REAL,
+            profit REAL
+        );
+    `);
+}
 
 function addEntry() {
-    const stockName = document.getElementById("stockName").value;
-    const buyPrice = document.getElementById("buyPrice").value;
-    const sellPrice = document.getElementById("sellPrice").value;
+    const stock = document.getElementById("stockName").value;
+    const buy = parseFloat(document.getElementById("buyPrice").value);
+    const sell = parseFloat(document.getElementById("sellPrice").value);
 
-    if (!stockName || !buyPrice || !sellPrice) {
+    if (!stock || !buy || !sell) {
         alert("Please enter all fields.");
         return;
     }
 
-    const profitLoss = sellPrice - buyPrice;
+    const profit = sell - buy;
 
-    entries.push({
-        stock: stockName,
-        buy: buyPrice,
-        sell: sellPrice,
-        result: profitLoss
-    });
+    db.run("INSERT INTO entries (stock, buy, sell, profit) VALUES (?, ?, ?, ?)", [stock, buy, sell, profit]);
 
     updateTable();
 }
 
 function updateTable() {
     const table = document.getElementById("entryTable");
+
+    const result = db.exec("SELECT * FROM entries");
+
+    if (result.length === 0) {
+        table.innerHTML = "<tr><th>Stock</th><th>Buy</th><th>Sell</th><th>Profit/Loss</th></tr>";
+        return;
+    }
+
+    const values = result[0].values;
 
     table.innerHTML = `
         <tr>
@@ -34,13 +58,13 @@ function updateTable() {
         </tr>
     `;
 
-    entries.forEach(entry => {
+    values.forEach(row => {
         table.innerHTML += `
             <tr>
-                <td>${entry.stock}</td>
-                <td>${entry.buy}</td>
-                <td>${entry.sell}</td>
-                <td>${entry.result}</td>
+                <td>${row[0]}</td>
+                <td>${row[1]}</td>
+                <td>${row[2]}</td>
+                <td>${row[3]}</td>
             </tr>
         `;
     });
