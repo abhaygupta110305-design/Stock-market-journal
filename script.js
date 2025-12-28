@@ -52,4 +52,17 @@ const news = [
 
 news.forEach(n => {
   newsList.innerHTML += `<li>📰 ${n}</li>`;
-});
+});.hero {
+  height: 90vh;
+  background: url("https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  background: rgba(0,0,0,0.6);
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+}
