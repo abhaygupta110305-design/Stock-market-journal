@@ -5,7 +5,7 @@
 <title>StockX Journal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Chart.js CDN -->
+<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <link rel="stylesheet" href="style.css">
@@ -18,83 +18,35 @@
   <p>Track • Analyze • Grow</p>
 </header>
 
-<!-- CHART -->
-<section class="card">
-  <h2>Market Trend</h2>
-  <canvas id="marketChart"></canvas>
+<section class="hero">
+  <h2>Smart Stock Market Journal</h2>
+  <p>Track trades • Analyse performance • Stay updated</p>
 </section>
 
 <!-- JOURNAL -->
 <section class="card">
   <h2>Trade Journal</h2>
-  <input id="stockName" placeholder="Stock Name">
-  <input id="buyPrice" type="number" placeholder="Buy">
-  <input id="sellPrice" type="number" placeholder="Sell">
+
+  <input type="date" id="tradeDate">
+  <input type="text" id="stockName" placeholder="Stock Name">
+  <input type="number" id="buyPrice" placeholder="Buy Price">
+  <input type="number" id="sellPrice" placeholder="Sell Price">
+
   <button onclick="addEntry()">Add Entry</button>
 
   <table id="entryTable"></table>
 </section>
 
-<!-- NEWS -->
+<!-- CHART -->
 <section class="card">
-  <h2>Market News</h2>
-  <ul id="newsList"></ul>
+  <h2>Profit / Loss Chart</h2>
+  <canvas id="marketChart"></canvas>
 </section>
 
-<script src="script.js"></script>
-</body> <section class="hero">
-  <div class="hero-content">
-    <h1>Smart Stock Market Journal</h1>
-    <p>Track trades • Analyse performance • Stay updated with markets</p>
-    <button>Start Journaling</button>
-  </div>
-</section><section class="card">
-  <h2>Platform Features</h2>
-  <div class="features">
-    <div>
-      <img src="https://cdn-icons-png.flaticon.com/512/2103/2103658.png">
-      <p>Trade Tracking</p>
-    </div>
-    <div>
-      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png">
-      <p>Performance Analysis</p>
-    </div>
-    <div>
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
-      <p>Market Insights</p>
-    </div>
-  </div>
-</section><section class="card">
-  <h2>Market Highlights</h2>
-  <div class="news-grid">
-    <div>
-      <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e">
-      <p>Markets surge amid global optimism</p>
-    </div>
-    <div>
-      <img src="https://images.unsplash.com/photo-1565373677928-90e963765eac">
-      <p>Tech stocks lead the rally</p>
-    </div>
-    <div>
-      <img src="https://images.unsplash.com/photo-1559526324-593bc073d938">
-      <p>Investors eye RBI policy</p>
-    </div>
-  </div>
-</section><section class="card">
-  <h2>Why Traders Choose Us</h2>
-  <ul>
-    <li>✔ Simple & Secure Journal</li>
-    <li>✔ Smart Market Insights</li>
-    <li>✔ Beginner Friendly Interface</li>
-    <li>✔ Data Stored Locally</li>
-  </ul>
-</section><footer>
+<footer>
   <p>© 2025 Stock Journal | Educational Project</p>
 </footer>
-</html><input type="date" id="tradeDate">
-<input type="text" id="stockName" placeholder="Stock Name">
-<input type="number" id="buyPrice" placeholder="Buy Price">
-<input type="number" id="sellPrice" placeholder="Sell Price">
-<button onclick="addEntry()">Add Entry</button>
 
-<canvas id="weeklyChart"></canvas><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
