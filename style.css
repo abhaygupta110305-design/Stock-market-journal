@@ -54,4 +54,18 @@ td, th {
   padding: 40px;
   border-radius: 15px;
   text-align: center;
+}.features {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.features img {
+  width: 60px;
+  margin-bottom: 10px;
+}footer {
+  text-align: center;
+  padding: 15px;
+  background: #000;
+  color: #aaa;
 }
