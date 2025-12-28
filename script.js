@@ -65,4 +65,61 @@ news.forEach(n => {
   padding: 40px;
   border-radius: 15px;
   text-align: center;
+}let journal = JSON.parse(localStorage.getItem("journal")) || {};
+
+function addEntry() {
+    const date = document.getElementById("tradeDate").value;
+    const stock = document.getElementById("stockName").value;
+    const buy = Number(document.getElementById("buyPrice").value);
+    const sell = Number(document.getElementById("sellPrice").value);
+
+    if (!date || !stock || !buy || !sell) {
+        alert("Fill all fields");
+        return;
+    }
+
+    if (!journal[date]) journal[date] = [];
+
+    if (journal[date].length >= 10) {
+        alert("Max 10 entries per day allowed");
+        return;
+    }
+
+    journal[date].push({
+        stock,
+        profit: sell - buy
+    });
+
+    localStorage.setItem("journal", JSON.stringify(journal));
+    updateChart();
 }
+
+function updateChart() {
+    const dates = Object.keys(journal).slice(-7);
+    const profits = dates.map(d =>
+        journal[d].reduce((sum, e) => sum + e.profit, 0)
+    );
+
+    drawChart(dates, profits);
+}let chart;
+
+function drawChart(labels, data) {
+    const ctx = document.getElementById("weeklyChart").getContext("2d");
+
+    if (chart) chart.destroy();
+
+    chart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels,
+            datasets: [{
+                label: "Weekly Profit/Loss",
+                data,
+                borderWidth: 2,
+                tension: 0.4
+            }]
+        }
+    });
+}
+
+updateChart();
